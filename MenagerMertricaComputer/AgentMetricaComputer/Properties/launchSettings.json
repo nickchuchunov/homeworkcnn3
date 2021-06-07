@@ -3,8 +3,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:54155",
-      "sslPort": 44381
+      "applicationUrl": "http://localhost:54157",
+      "sslPort": 44319
     }
   },
   "profiles": {
@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "MenagerMertricaComputer": {
+    "AgentMetricaComputer": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,

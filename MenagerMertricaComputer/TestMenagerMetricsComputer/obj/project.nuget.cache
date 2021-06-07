@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "dgSpecHash": "j6ah8JOksQG8RMsAf+/LHhxTE8SXFLDDvtJsyNkR0QNfP+D0eYl6J55ZfOK8OcIvJW1afTRuGReW7J+jUhQVYg==",
+  "success": false,
+  "projectFilePath": "H:\\homeworkcnn3\\MenagerMertricaComputer\\TestMenagerMetricsComputer\\TestMenagerMetricsComputer.csproj",
+  "expectedPackageFiles": [],
+  "logs": [
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "Проект MenagerMertricaComputer несовместим с netcoreapp3.1 (.NETCoreApp,Version=v3.1). Проект MenagerMertricaComputer поддерживает: net5.0 (.NETCoreApp,Version=v5.0)",
+      "libraryId": "MenagerMertricaComputer",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    }
+  ]
+}

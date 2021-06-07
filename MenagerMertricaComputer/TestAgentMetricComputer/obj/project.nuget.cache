@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "dgSpecHash": "0ZWKY5kffJxvjqb/8lKeyR/2JvU8nP/mGtYUwsiGusMg49GkApdus3QsinsMSg41joGWUU1sEaDR4tWcdlmnlQ==",
+  "success": false,
+  "projectFilePath": "H:\\homeworkcnn3\\MenagerMertricaComputer\\TestAgentMetricComputer\\TestAgentMetricComputer.csproj",
+  "expectedPackageFiles": [],
+  "logs": [
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "Проект AgentMetricaComputer несовместим с netcoreapp3.1 (.NETCoreApp,Version=v3.1). Проект AgentMetricaComputer поддерживает: net5.0 (.NETCoreApp,Version=v5.0)",
+      "libraryId": "AgentMetricaComputer",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    }
+  ]
+}
