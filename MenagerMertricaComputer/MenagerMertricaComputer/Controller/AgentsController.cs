@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MenagerMertricaComputer.Controller
 {
-    [Route("api/metrics/cpu/from/{fromTime}/to/{toTime}/percentiles/{percentile} ")]
+    [Route("api/metrics/AgentsController")]
     [ApiController]
     public class AgentsController : ControllerBase
     {
