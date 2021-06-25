@@ -1,8 +1,19 @@
 {
   "version": 2,
-  "dgSpecHash": "BVf3M1HlzEM8A8IRq2nowQc9D7vLKOByvXQM72xHFvqdJvRWY4jn/ifvrIEG1PcJvl93i8jYi5GvBcxsCqzQoA==",
+  "dgSpecHash": "vpsKGGTM6P26yTZorIQ383YOnH/NPI7ohe2KECfMEbDBWOnS+wFovhJvIdooNEWdSnTKAlRTDVWjVrj7e8fwFA==",
   "success": true,
   "projectFilePath": "H:\\homeworkcnn3\\MenagerMertricaComputer\\MenagerMertricaComputer\\MenagerMertricaComputer.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\chuch\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\5.0.0\\microsoft.extensions.configuration.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\chuch\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\5.0.0\\microsoft.extensions.dependencyinjection.5.0.0.nupkg.sha512",
+    "C:\\Users\\chuch\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\5.0.0\\microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\chuch\\.nuget\\packages\\microsoft.extensions.logging\\5.0.0\\microsoft.extensions.logging.5.0.0.nupkg.sha512",
+    "C:\\Users\\chuch\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\5.0.0\\microsoft.extensions.logging.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\chuch\\.nuget\\packages\\microsoft.extensions.options\\5.0.0\\microsoft.extensions.options.5.0.0.nupkg.sha512",
+    "C:\\Users\\chuch\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.0\\microsoft.extensions.primitives.5.0.0.nupkg.sha512",
+    "C:\\Users\\chuch\\.nuget\\packages\\nlog\\4.7.9\\nlog.4.7.9.nupkg.sha512",
+    "C:\\Users\\chuch\\.nuget\\packages\\nlog.extensions.logging\\1.7.2\\nlog.extensions.logging.1.7.2.nupkg.sha512",
+    "C:\\Users\\chuch\\.nuget\\packages\\nlog.web.aspnetcore\\4.12.0\\nlog.web.aspnetcore.4.12.0.nupkg.sha512"
+  ],
   "logs": []
 }
