@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace MenagerMertricaComputer.Controller
 {
@@ -12,35 +13,47 @@ namespace MenagerMertricaComputer.Controller
     public class NetmetricsMenegerController : ControllerBase
     {
 
-        [Route("api/metrics/cpu//from/{fromTime}/to/{toTime}/")]
+
+        public ILogger MenegerController; // объект для логирования
+
+        void LoggerMenager(ILogger LoggerCpuMenegerController, object agentId) // функция логирования входных аргументов
+        {
+            object agentIdlog = null;
+
+            while (agentId != agentIdlog) { DateTime r = DateTime.Now; agentIdlog = agentId; LoggerCpuMenegerController.LogDebug(2, "Метод EnableAgentById, Входной параметр agentId  " + agentId + " " + r); }
+
+
+        }
+
+
+
+        
         [HttpGet("api/metrics/cpu//from/{fromTime}/to/{toTime}/")]
-        public IActionResult GetMetricsFromAgent([FromRoute] int agentId, [FromRoute] TimeSpan fromTime, [FromRoute] TimeSpan toTime)
+        public IActionResult GetMetricsFromAgent([FromRoute] int agentId, [FromRoute] DateTimeOffset fromTime, [FromRoute] DateTimeOffset toTime)
         {
-            return Ok();
-        }
-        [Route("api/metrics/dotnet/errors-count/from/{fromTime}/to/{toTime}")]
-        [HttpGet("api/metrics/dotnet/errors-count/from/{fromTime}/to/{toTime}")]
-        public IActionResult GetMetricsByPercentileFromAgent([FromRoute] int agentId, [FromRoute] TimeSpan fromTime, [FromRoute] TimeSpan toTime)
-        {
-            return Ok();
-        }
+
+            LoggerMenager(MenegerController, agentId);
 
 
-        [Route("api/metrics/network/from/{fromTime}/to/{toTime}/")]
+            return Ok();
+        }
+        
+        
+
+
+       
         [HttpGet("api/metrics/network/from/{fromTime}/to/{toTime}/")]
 
-        public IActionResult GetMetricsFromAllCluster([FromRoute] TimeSpan fromTime, [FromRoute] TimeSpan toTime)
+        public IActionResult GetMetricsFromAllCluster([FromRoute] DateTimeOffset fromTime, [FromRoute] DateTimeOffset toTime)
         {
+
+            LoggerMenager(MenegerController, fromTime);
             return Ok();
         }
 
 
-        [Route("api/metrics/cpu/from/{fromTime}/to/{toTime}/percentiles/{percentile}")]
-        [HttpGet("api/metrics/cpu/from/{fromTime}/to/{toTime}/percentiles/{percentile}")]
-        public IActionResult GetMetricsByPercentileFromAllCluster([FromRoute] TimeSpan fromTime, [FromRoute] TimeSpan toTime, [FromRoute] Percentile percentile)
-        {
-            return Ok();
-        }
+        
+       
 
 
 

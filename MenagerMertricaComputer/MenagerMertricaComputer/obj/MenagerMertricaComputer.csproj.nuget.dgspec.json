@@ -1,36 +1,36 @@
 {
   "format": 1,
   "restore": {
-    "H:\\homeworkcnn3\\MenagerMertricaComputer\\MenagerMertricaComputer\\MenagerMertricaComputer.csproj": {}
+    "L:\\homeworkcnn3test\\MenagerMertricaComputer\\MenagerMertricaComputer\\MenagerMertricaComputer.csproj": {}
   },
   "projects": {
-    "H:\\homeworkcnn3\\MenagerMertricaComputer\\MenagerMertricaComputer\\MenagerMertricaComputer.csproj": {
+    "L:\\homeworkcnn3test\\MenagerMertricaComputer\\MenagerMertricaComputer\\MenagerMertricaComputer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "H:\\homeworkcnn3\\MenagerMertricaComputer\\MenagerMertricaComputer\\MenagerMertricaComputer.csproj",
+        "projectUniqueName": "L:\\homeworkcnn3test\\MenagerMertricaComputer\\MenagerMertricaComputer\\MenagerMertricaComputer.csproj",
         "projectName": "MenagerMertricaComputer",
-        "projectPath": "H:\\homeworkcnn3\\MenagerMertricaComputer\\MenagerMertricaComputer\\MenagerMertricaComputer.csproj",
-        "packagesPath": "C:\\Users\\chuch\\.nuget\\packages\\",
-        "outputPath": "H:\\homeworkcnn3\\MenagerMertricaComputer\\MenagerMertricaComputer\\obj\\",
+        "projectPath": "L:\\homeworkcnn3test\\MenagerMertricaComputer\\MenagerMertricaComputer\\MenagerMertricaComputer.csproj",
+        "packagesPath": "C:\\Users\\chuchunov.n-hom\\.nuget\\packages\\",
+        "outputPath": "L:\\homeworkcnn3test\\MenagerMertricaComputer\\MenagerMertricaComputer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\chuch\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\chuchunov.n-hom\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net5.0"
+          "netcoreapp3.1"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net5.0": {
-            "targetAlias": "net5.0",
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -41,12 +41,20 @@
         }
       },
       "frameworks": {
-        "net5.0": {
-          "targetAlias": "net5.0",
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "NLog.Web": {
+              "target": "Package",
+              "version": "[4.12.0, )"
+            },
             "NLog.Web.AspNetCore": {
               "target": "Package",
               "version": "[4.12.0, )"
+            },
+            "System.Data.SQLite.Core": {
+              "target": "Package",
+              "version": "[1.0.114.3, )"
             }
           },
           "imports": [
@@ -67,7 +75,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
         }
       }
     }
