@@ -1,8 +1,23 @@
 {
   "version": 2,
-  "dgSpecHash": "WE5yMpDN9FuOwQAxv43tSX90I3XhjozHrrFZZEiZXhI9nqi5sHGL0S1W2QHb8nSL322P12WF2JXhu54lpK+kUQ==",
+  "dgSpecHash": "mrwP8U1XeNQLWH7L1A1/WaVnXIBqJ/cpE5TSVjhCpqGt6Fp5nlxUMpWbg6nIUsIBHWRrUO09A/wbrlGpkAVv2g==",
   "success": true,
-  "projectFilePath": "H:\\homeworkcnn3\\MenagerMertricaComputer\\AgentMetricaComputer\\AgentMetricaComputer.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "L:\\homeworkcnn3test\\MenagerMertricaComputer\\AgentMetricaComputer\\AgentMetricaComputer.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\chuchunov.n-hom\\.nuget\\packages\\microsoft.extensions.configuration\\3.0.0\\microsoft.extensions.configuration.3.0.0.nupkg.sha512",
+    "C:\\Users\\chuchunov.n-hom\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\3.0.0\\microsoft.extensions.configuration.abstractions.3.0.0.nupkg.sha512",
+    "C:\\Users\\chuchunov.n-hom\\.nuget\\packages\\microsoft.extensions.configuration.binder\\3.0.0\\microsoft.extensions.configuration.binder.3.0.0.nupkg.sha512",
+    "C:\\Users\\chuchunov.n-hom\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\3.0.0\\microsoft.extensions.dependencyinjection.3.0.0.nupkg.sha512",
+    "C:\\Users\\chuchunov.n-hom\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\3.0.0\\microsoft.extensions.dependencyinjection.abstractions.3.0.0.nupkg.sha512",
+    "C:\\Users\\chuchunov.n-hom\\.nuget\\packages\\microsoft.extensions.logging\\3.0.0\\microsoft.extensions.logging.3.0.0.nupkg.sha512",
+    "C:\\Users\\chuchunov.n-hom\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\3.0.0\\microsoft.extensions.logging.abstractions.3.0.0.nupkg.sha512",
+    "C:\\Users\\chuchunov.n-hom\\.nuget\\packages\\microsoft.extensions.options\\3.0.0\\microsoft.extensions.options.3.0.0.nupkg.sha512",
+    "C:\\Users\\chuchunov.n-hom\\.nuget\\packages\\microsoft.extensions.primitives\\3.0.0\\microsoft.extensions.primitives.3.0.0.nupkg.sha512",
+    "C:\\Users\\chuchunov.n-hom\\.nuget\\packages\\nlog\\4.7.9\\nlog.4.7.9.nupkg.sha512",
+    "C:\\Users\\chuchunov.n-hom\\.nuget\\packages\\nlog.extensions.logging\\1.7.2\\nlog.extensions.logging.1.7.2.nupkg.sha512",
+    "C:\\Users\\chuchunov.n-hom\\.nuget\\packages\\nlog.web.aspnetcore\\4.12.0\\nlog.web.aspnetcore.4.12.0.nupkg.sha512",
+    "C:\\Users\\chuchunov.n-hom\\.nuget\\packages\\stub.system.data.sqlite.core.netstandard\\1.0.114.3\\stub.system.data.sqlite.core.netstandard.1.0.114.3.nupkg.sha512",
+    "C:\\Users\\chuchunov.n-hom\\.nuget\\packages\\system.data.sqlite.core\\1.0.114.3\\system.data.sqlite.core.1.0.114.3.nupkg.sha512"
+  ],
   "logs": []
 }
