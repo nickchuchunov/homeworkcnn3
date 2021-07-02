@@ -7,14 +7,16 @@ namespace AgentMetricaComputer
 {
     public class CpuAgentMetrica
     {
+
+        public CpuAgentMetrica() { }
         public int Id { get; set; }
         public int Value { get; set; }
 
-        public DateTimeOffset Time { get; set; }
+        public long Time { get; set; }
 
 
 
-       public CpuAgentMetrica() { }
+       
 
 
 

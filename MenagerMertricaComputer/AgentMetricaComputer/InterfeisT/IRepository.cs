@@ -14,7 +14,7 @@ namespace AgentMetricaComputer
     {
         public void Create(T item);
 
-        public IList<T> GetByTimePeriod( );
+        public IList<T> GetByTimePeriod(int id );
 
 
     }

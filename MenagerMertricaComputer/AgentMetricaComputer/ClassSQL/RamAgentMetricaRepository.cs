@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Data.SQLite;
+using Dapper;
 namespace AgentMetricaComputer
 {
     public class RamAgentMetricaRepository : IRamAgentMetricaRepository
@@ -12,53 +13,30 @@ namespace AgentMetricaComputer
         public void Create(RamAgentMetrica item) // Создание таблицы  в базе данных и запись метрик  в таблицу
         {
 
-            using var connection = new SQLiteConnection(ConnectionString);
-            connection.Open();
+            using (var connection = new SQLiteConnection(ConnectionString))
+            {
+               
 
-            using var cmd = new SQLiteCommand(connection);
-            cmd.CommandText = "DROP TABLE IF EXISTS rammetrica";
-            cmd.ExecuteNonQuery();
-            cmd.CommandText = @"CREATE TABLE rammetrica( id INTEGER PRIMARY KEI, value INT, time INT)";
-            cmd.CommandText = "INSERT INTO rammetrica(value, time) VALUES (@value, @time)";
-            cmd.Parameters.AddWithValue("@value", item.Value);
+                
+                connection.Execute("CREATE TABLE rammetrica( id INTEGER PRIMARY KEI, value INT, time INTEGER)", new { value = item.Value, time = item.Time });
 
-            long unixtime = 62168472000; // количество секунд на 1970 г.
-
-            cmd.Parameters.AddWithValue("@time", (item.Time.Minute - unixtime));
-            cmd.Prepare();
-            cmd.ExecuteNonQuery();
+            }
+            
 
 
         }
 
-        public IList<RamAgentMetrica> GetByTimePeriod() // чтение метрик из базы данных 
+        public IList<RamAgentMetrica> GetByTimePeriod(int id) // чтение метрик из базы данных 
         {
 
-            using var connection = new SQLiteConnection(ConnectionString);
-            connection.Open();
-            using var cmd = new SQLiteCommand(connection);
-            cmd.CommandText = "SELECT * FROM rammetrica";
-            var returnList = new List<RamAgentMetrica>();
+            using (var connection = new SQLiteConnection(ConnectionString))
 
-            using (SQLiteDataReader reader = cmd.ExecuteReader())
-            {
-
-                while (reader.Read())
-                {
-                    returnList.Add(new RamAgentMetrica { Id = reader.GetInt32(0), Value = reader.GetInt32(1), Time = DateTimeOffset.FromUnixTimeSeconds(reader.GetInt32(1)) });// Преобразует время в формате Unix, выраженное как количество секунд, истекших с 1970 в DateTimeOfset
-
-                }
-
+            { 
+                return connection.QuerySingle<System.Collections.Generic.IList<RamAgentMetrica>>("SELECT Id, Time, Value FROM rammetrica WHERE id=@id", new { id = id });
             }
 
-
-
-            return returnList;
-
-
-
-
-
+          
+            
 
 
         }

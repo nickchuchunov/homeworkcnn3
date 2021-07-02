@@ -12,5 +12,8 @@ namespace AgentMetricaComputer
 
         public List<T> Metrics { get; set; }
 
+
+
+
     }
 }

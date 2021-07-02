@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Data.SQLite;
+using Dapper;
 namespace AgentMetricaComputer
 {
     public class NetworkAgentMetricaRepository : INetworkAgentMetricaRepository
@@ -13,55 +14,28 @@ namespace AgentMetricaComputer
 
         public void Create(NetworkAgentMetrica item) // Создание таблицы  в базе данных и запись метрик  в таблицу
         {
-            using var connection = new SQLiteConnection(ConnectionString);
-            connection.Open();
 
-            using var cmd = new SQLiteCommand(connection);
-            cmd.CommandText = "DROP TABLE IF EXISTS networkmetrica";
-            cmd.ExecuteNonQuery();
-            cmd.CommandText = @"CREATE TABLE networkmetrica( id INTEGER PRIMARY KEI, value INT, time INT)";
-            cmd.CommandText = "INSERT INTO networkmetrica(value, time) VALUES (@value, @time)";
-            cmd.Parameters.AddWithValue("@value", item.Value);
-            long unixtime = 62168472000; // количество секунд на 1970 г.
+            using (var connection = new SQLiteConnection(ConnectionString))
+            {
 
-            cmd.Parameters.AddWithValue("@time", (item.Time.Minute - unixtime));
+                
+                connection.Execute("CREATE TABLE networkmetrica( id INTEGER PRIMARY KEI, value INT, time INTEGER)", new { value = item.Value, time = item.Time });
 
-            cmd.Prepare();
-            cmd.ExecuteNonQuery();
-
+            }
            
         }
 
-        public IList<NetworkAgentMetrica> GetByTimePeriod() // чтение метрик из базы данных 
+        public IList<NetworkAgentMetrica> GetByTimePeriod(int id) // чтение метрик из базы данных 
         {
 
+            using (var connection = new SQLiteConnection(ConnectionString))
 
-            using var connection = new SQLiteConnection(ConnectionString);
-            connection.Open();
-            using var cmd = new SQLiteCommand(connection);
-            cmd.CommandText = "SELECT * FROM networkmetrica";
-            var returnList = new List<NetworkAgentMetrica>();
-
-            using (SQLiteDataReader reader = cmd.ExecuteReader())
             {
-
-                while (reader.Read())
-                {
-                    returnList.Add(new NetworkAgentMetrica { Id = reader.GetInt32(0), Value = reader.GetInt32(1), Time = DateTimeOffset.FromUnixTimeSeconds(reader.GetInt32(1)) });// Преобразует время в формате Unix, выраженное как количество секунд, истекших с 1970 в DateTimeOfset
-
-                }
-
+                return connection.QuerySingle<System.Collections.Generic.IList<NetworkAgentMetrica>>("SELECT Id, Time, Value FROM networkmetrica WHERE id=@id", new { id = id });
             }
 
 
-
-            return returnList;
-
-
-
-
-
-
+            //        returnList.Add(new RamAgentMetrica { Id = reader.GetInt32(0), Value = reader.GetInt32(1), Time = DateTimeOffset.FromUnixTimeSeconds(reader.GetInt32(1)) });// Преобразует время в формате Unix, выраженное как количество секунд, истекших с 1970 в DateTimeOfset
 
 
         }

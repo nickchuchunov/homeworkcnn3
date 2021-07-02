@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using AutoMapper;
 
 namespace AgentMetricaComputer
 {
@@ -14,9 +15,9 @@ namespace AgentMetricaComputer
     {
 
 
-        private INetMetricsAgentMetricaRepository repository; //!
+        private NetMetricsAgentMetricaRepository repository; //!
 
-        NetMetricsAgentController(INetMetricsAgentMetricaRepository repository) //
+        NetMetricsAgentController(NetMetricsAgentMetricaRepository repository) //
         {
             this.repository = repository;
         }
@@ -27,27 +28,32 @@ namespace AgentMetricaComputer
         public IActionResult Create([FromBody] MetricCreateRequest request)
         {
             repository.Create(new NetMetricsAgentMetrica { Time = request.Time, Value = request.Value }); //
+
+           
+
+
+
+
             return Ok();
         }
 
 
         [HttpGet("all")]
-        public IActionResult GetAll()
+        public IActionResult GetAll(int id)
         {
-            var metrics = repository.GetByTimePeriod();
-            var response = new MetricsResponse<NetMetricsAgentMetrica> //
+            var config = new MapperConfiguration(ctf => ctf.CreateMap<NetMetricsAgentMetrica, MetricDto>());
+            var mapper = config.CreateMapper();
+
+
+            var metrics = repository.GetByTimePeriod(id);
+            var response = new MetricsResponse<MetricDto>
             {
-                Metrics = new List<NetMetricsAgentMetrica>() //
+                Metrics = new List<MetricDto>() //
             };
             foreach (var metric in metrics)
             {
 
-                object gfh = new MetricDto { Id = metric.Id, Value = metric.Value, Time = metric.Time };
-
-
-
-                response.Metrics.Add((NetMetricsAgentMetrica)gfh); //
-
+                response.Metrics.Add(mapper.Map<MetricDto>(metric));
 
 
 
