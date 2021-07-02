@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Data.SQLite;
+using Dapper;
 
 namespace AgentMetricaComputer
 {
@@ -14,53 +15,33 @@ namespace AgentMetricaComputer
 
         public void Create(HardDriverAgentMetrica item) // Создание таблицы  в базе данных и запись метрик  в таблицу
         {
-            using var connection = new SQLiteConnection(ConnectionString);
-            connection.Open();
 
-            using var cmd = new SQLiteCommand(connection);
-            cmd.CommandText = "DROP TABLE IF EXISTS harddrivemetrica";
-            cmd.ExecuteNonQuery();
-            cmd.CommandText = @"CREATE TABLE harddrivemetrica( id INTEGER PRIMARY KEI, value INT, time INT)";
-            cmd.CommandText = "INSERT INTO harddrivemetrica(value, time) VALUES (@value, @time)";
-            cmd.Parameters.AddWithValue("@value", item.Value);
+            using (var connection = new SQLiteConnection(ConnectionString))
+            {
 
-            long unixtime = 62168472000; // количество секунд на 1970 г.
+            
+                connection.Execute("CREATE TABLE harddrivemetrica( id INTEGER PRIMARY KEI, value INT, time INTEGER)", new { value = item.Value, time = item.Time });
 
-            cmd.Parameters.AddWithValue("@time", (item.Time.Minute - unixtime));
-            cmd.Prepare();
-            cmd.ExecuteNonQuery();
+            }
+
+
         }
 
 
 
-        public IList<HardDriverAgentMetrica> GetByTimePeriod() // чтение метрик из базы данных 
+        public IList<HardDriverAgentMetrica> GetByTimePeriod(int id) // чтение метрик из базы данных 
         {
-            using var connection = new SQLiteConnection(ConnectionString);
-            connection.Open();
-            using var cmd = new SQLiteCommand(connection);
-            cmd.CommandText = "SELECT * FROM harddrivemetrica";
-            var returnList = new List<HardDriverAgentMetrica>();
 
-            using (SQLiteDataReader reader =cmd.ExecuteReader())
+
+            using (var connection = new SQLiteConnection(ConnectionString))
+
             {
-
-                while (reader.Read())
-                {
-                    returnList.Add( new HardDriverAgentMetrica { Id = reader.GetInt32(0), Value =reader.GetInt32(1), Time = DateTimeOffset.FromUnixTimeSeconds(reader.GetInt32(1)) });// Преобразует время в формате Unix, выраженное как количество секунд, истекших с 1970 в DateTimeOfset
-
-
-
-                }
-            
-            
-            
-            
-            
+                return connection.QuerySingle<System.Collections.Generic.IList<HardDriverAgentMetrica>>("SELECT Id, Time, Value FROM harddrivemetrica WHERE id=@id", new { id = id });
             }
 
+            //        returnList.Add(new RamAgentMetrica { Id = reader.GetInt32(0), Value = reader.GetInt32(1), Time = DateTimeOffset.FromUnixTimeSeconds(reader.GetInt32(1)) });// Преобразует время в формате Unix, выраженное как количество секунд, истекших с 1970 в DateTimeOfset
 
 
-            return returnList;
         }
     }
 

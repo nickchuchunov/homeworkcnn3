@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using AutoMapper;
 
 using System.Data.SQLite;
 
@@ -16,9 +17,9 @@ namespace AgentMetricaComputer
     public class CpuAgentController : ControllerBase
     {
 
-        private ICpuAgentMetricaRepository repository;
+        private CpuAgentMetricaRepository repository;
 
-        CpuAgentController(ICpuAgentMetricaRepository repository)
+        CpuAgentController(CpuAgentMetricaRepository repository)
         {
             this.repository = repository;
         }
@@ -29,31 +30,33 @@ namespace AgentMetricaComputer
         public IActionResult Create([FromBody] MetricCreateRequest request)
         {
          repository.Create(new CpuAgentMetrica { Time = request.Time, Value = request.Value });
+
+           
             return Ok();
+
+
         }
 
 
         [HttpGet("all")]
-        public IActionResult GetAll()
+        public IActionResult GetAll(int id)
         {
-            var metrics = repository.GetByTimePeriod();
-            var response = new MetricsResponse<CpuAgentMetrica>
+            var config = new MapperConfiguration(ctf => ctf.CreateMap<CpuAgentMetrica, MetricDto>());
+            var mapper = config.CreateMapper();
+
+
+            var metrics = repository.GetByTimePeriod(id);
+            var response = new MetricsResponse<MetricDto>
             {
-                Metrics = new List<CpuAgentMetrica>()
+                Metrics = new List<MetricDto>() //
             };
             foreach (var metric in metrics)
             {
 
-                object gfh = new MetricDto { Id = metric.Id, Value = metric.Value, Time = metric.Time };
-
-
-
-                response.Metrics.Add((CpuAgentMetrica)gfh);
-               
-
-
+                response.Metrics.Add(mapper.Map<MetricDto>(metric));
 
             }
+
             return Ok(response);
         }
 
@@ -71,16 +74,6 @@ namespace AgentMetricaComputer
             DateTime r = DateTime.Now;
             LoggerCpuAgentController.LogDebug(2, " Регистрация события  в указанное время " + r);
         }
-
-
-
-
-
-
-
-
-
-
 
 
         }

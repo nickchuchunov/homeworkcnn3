@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-
+using AutoMapper;
 
 namespace AgentMetricaComputer
 {
@@ -14,51 +14,45 @@ namespace AgentMetricaComputer
     public class NetworkAgentController : ControllerBase
     {
 
-        private INetworkAgentMetricaRepository repository; //!
+        private NetworkAgentMetricaRepository repository;
 
-        NetworkAgentController(INetworkAgentMetricaRepository repository) //
+        NetworkAgentController(NetworkAgentMetricaRepository repository)
         {
             this.repository = repository;
         }
 
-
-
         [HttpPost("create")]
         public IActionResult Create([FromBody] MetricCreateRequest request)
         {
-            repository.Create(new NetworkAgentMetrica { Time = request.Time, Value = request.Value }); //
+            repository.Create(new NetworkAgentMetrica { Time = request.Time, Value = request.Value });
+
             return Ok();
         }
 
 
         [HttpGet("all")]
-        public IActionResult GetAll()
+        public IActionResult GetAll(int id)
         {
-            var metrics = repository.GetByTimePeriod();
-            var response = new MetricsResponse<NetworkAgentMetrica> //
+
+            var config = new MapperConfiguration(ctf => ctf.CreateMap<NetworkAgentMetrica, MetricDto>());
+            var mapper = config.CreateMapper();
+
+
+            var metrics = repository.GetByTimePeriod(id);
+            var response = new MetricsResponse<MetricDto> 
             {
-                Metrics = new List<NetworkAgentMetrica>() //
+                Metrics = new List<MetricDto>() //
             };
             foreach (var metric in metrics)
             {
 
-                object gfh = new MetricDto { Id = metric.Id, Value = metric.Value, Time = metric.Time };
-
-
-
-                response.Metrics.Add((NetworkAgentMetrica)gfh); //
-
+                response.Metrics.Add(mapper.Map<MetricDto>(metric));
 
 
 
             }
             return Ok(response);
         }
-
-
-
-
-
 
 
         // логирование
@@ -70,15 +64,6 @@ namespace AgentMetricaComputer
             LoggerNetworkAgent.LogDebug(2, " Регистрация события  в указанное время " + r);
 
         }
-
-
-
-
-
-
-
-
-
 
     }
 }

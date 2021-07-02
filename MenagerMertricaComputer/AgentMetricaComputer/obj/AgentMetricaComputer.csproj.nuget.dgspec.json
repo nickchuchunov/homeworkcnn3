@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "L:\\homeworkcnn3test\\MenagerMertricaComputer\\AgentMetricaComputer\\AgentMetricaComputer.csproj": {}
+    "L:\\homeworkcnn3test изм\\MenagerMertricaComputer\\AgentMetricaComputer\\AgentMetricaComputer.csproj": {}
   },
   "projects": {
-    "L:\\homeworkcnn3test\\MenagerMertricaComputer\\AgentMetricaComputer\\AgentMetricaComputer.csproj": {
+    "L:\\homeworkcnn3test изм\\MenagerMertricaComputer\\AgentMetricaComputer\\AgentMetricaComputer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "L:\\homeworkcnn3test\\MenagerMertricaComputer\\AgentMetricaComputer\\AgentMetricaComputer.csproj",
+        "projectUniqueName": "L:\\homeworkcnn3test изм\\MenagerMertricaComputer\\AgentMetricaComputer\\AgentMetricaComputer.csproj",
         "projectName": "AgentMetricaComputer",
-        "projectPath": "L:\\homeworkcnn3test\\MenagerMertricaComputer\\AgentMetricaComputer\\AgentMetricaComputer.csproj",
+        "projectPath": "L:\\homeworkcnn3test изм\\MenagerMertricaComputer\\AgentMetricaComputer\\AgentMetricaComputer.csproj",
         "packagesPath": "C:\\Users\\chuchunov.n-hom\\.nuget\\packages\\",
-        "outputPath": "L:\\homeworkcnn3test\\MenagerMertricaComputer\\AgentMetricaComputer\\obj\\",
+        "outputPath": "L:\\homeworkcnn3test изм\\MenagerMertricaComputer\\AgentMetricaComputer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -44,6 +44,14 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.1.1, )"
+            },
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.0.90, )"
+            },
             "NLog.Web.AspNetCore": {
               "target": "Package",
               "version": "[4.12.0, )"

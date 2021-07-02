@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-
+using AutoMapper;
 
 namespace AgentMetricaComputer
 {
@@ -14,9 +14,9 @@ namespace AgentMetricaComputer
     public class RamAgentController : ControllerBase
     {
 
-        private IRamAgentMetricaRepository repository; //!
+        private RamAgentMetricaRepository repository; //!
 
-        RamAgentController(IRamAgentMetricaRepository repository) //
+        RamAgentController(RamAgentMetricaRepository repository) //
         {
             this.repository = repository;
         }
@@ -26,37 +26,34 @@ namespace AgentMetricaComputer
         [HttpPost("create")]
         public IActionResult Create([FromBody] MetricCreateRequest request)
         {
-            repository.Create(new RamAgentMetrica { Time = request.Time, Value = request.Value }); //
+            repository.Create(new RamAgentMetrica { Time = request.Time, Value = request.Value });
+
             return Ok();
         }
 
 
         [HttpGet("all")]
-        public IActionResult GetAll()
+        public IActionResult GetAll(int id)
         {
-            var metrics = repository.GetByTimePeriod();
-            var response = new MetricsResponse<RamAgentMetrica> //
+            var config = new MapperConfiguration(ctf => ctf.CreateMap<RamAgentMetrica, MetricDto>());
+            var mapper = config.CreateMapper();
+
+
+            var metrics = repository.GetByTimePeriod(id);
+            var response = new MetricsResponse<MetricDto>
             {
-                Metrics = new List<RamAgentMetrica>() //
+                Metrics = new List<MetricDto>() //
             };
             foreach (var metric in metrics)
             {
 
-                object gfh = new MetricDto { Id = metric.Id, Value = metric.Value, Time = metric.Time };
-
-
-
-                response.Metrics.Add((RamAgentMetrica)gfh); //
-
+                response.Metrics.Add(mapper.Map<MetricDto>(metric));
 
 
 
             }
             return Ok(response);
         }
-
-
-
 
 
 
@@ -69,15 +66,6 @@ namespace AgentMetricaComputer
             LoggerRamAgent.LogDebug(2, " Регистрация события  в указанное время " + r);
 
         }
-
-
-
-
-
-
-
-
-
 
     }
 }

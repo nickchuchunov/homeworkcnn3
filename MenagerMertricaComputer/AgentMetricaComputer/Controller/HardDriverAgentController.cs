@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using NLog.Web;
-
+using AutoMapper;
 
 namespace AgentMetricaComputer
 {
@@ -16,9 +16,9 @@ namespace AgentMetricaComputer
     {
 
 
-        private IHardDriveAgentMetricaRepository repository; //!
+        private HardDriveAgentMetricaRepository repository; //!
 
-        HardDriverAgentController(IHardDriveAgentMetricaRepository repository) //
+        HardDriverAgentController(HardDriveAgentMetricaRepository repository) //
         {
             this.repository = repository;
         }
@@ -28,32 +28,33 @@ namespace AgentMetricaComputer
         [HttpPost("create")]
         public IActionResult Create([FromBody] MetricCreateRequest request)
         {
-            repository.Create(new HardDriverAgentMetrica { Time = request.Time, Value = request.Value }); //
+            repository.Create(new HardDriverAgentMetrica { Time = request.Time, Value = request.Value }); 
+           
+
+
             return Ok();
         }
 
 
         [HttpGet("all")]
-        public IActionResult GetAll()
+        public IActionResult GetAll(int id)
         {
-            var metrics = repository.GetByTimePeriod();
-            var response = new MetricsResponse<HardDriverAgentMetrica> //
+            var config = new MapperConfiguration(ctf => ctf.CreateMap<HardDriverAgentMetrica, MetricDto>());
+            var mapper = config.CreateMapper();
+
+
+            var metrics = repository.GetByTimePeriod(id);
+            var response = new MetricsResponse<MetricDto>
             {
-                Metrics = new List<HardDriverAgentMetrica>() //
+                Metrics = new List<MetricDto>() //
             };
             foreach (var metric in metrics)
             {
 
-                object gfh = new MetricDto { Id = metric.Id, Value = metric.Value, Time = metric.Time };
-
-
-
-                response.Metrics.Add((HardDriverAgentMetrica)gfh); //
-
-
-
+                response.Metrics.Add(mapper.Map<MetricDto>(metric));
 
             }
+
             return Ok(response);
         }
 

@@ -1,9 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "g0YtGhxUt3XSKTTPgnAF6FZVhwLJe7E/qPUfR0+JNLOrHEWmx6+98lrNM+zF8vP5qB9YSxnuVA4XwFz6Hyn+5w==",
+  "dgSpecHash": "fRFMu9RR9zFZfNue8sStwefL2J28qmUyGqmB5i3cviFml/ZfG6i9EXfSzDuHsD2FxBe3wwNSbx2LpTT9qCrz5g==",
   "success": true,
-  "projectFilePath": "L:\\homeworkcnn3test\\MenagerMertricaComputer\\MenagerMertricaComputer\\MenagerMertricaComputer.csproj",
+  "projectFilePath": "L:\\homeworkcnn3test изм\\MenagerMertricaComputer\\MenagerMertricaComputer\\MenagerMertricaComputer.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\chuchunov.n-hom\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
+    "C:\\Users\\chuchunov.n-hom\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",
+    "C:\\Users\\chuchunov.n-hom\\.nuget\\packages\\dapper\\2.0.90\\dapper.2.0.90.nupkg.sha512",
+    "C:\\Users\\chuchunov.n-hom\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\chuchunov.n-hom\\.nuget\\packages\\microsoft.extensions.configuration\\3.0.0\\microsoft.extensions.configuration.3.0.0.nupkg.sha512",
     "C:\\Users\\chuchunov.n-hom\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\3.0.0\\microsoft.extensions.configuration.abstractions.3.0.0.nupkg.sha512",
     "C:\\Users\\chuchunov.n-hom\\.nuget\\packages\\microsoft.extensions.configuration.binder\\3.0.0\\microsoft.extensions.configuration.binder.3.0.0.nupkg.sha512",
@@ -18,7 +22,9 @@
     "C:\\Users\\chuchunov.n-hom\\.nuget\\packages\\nlog.web\\4.12.0\\nlog.web.4.12.0.nupkg.sha512",
     "C:\\Users\\chuchunov.n-hom\\.nuget\\packages\\nlog.web.aspnetcore\\4.12.0\\nlog.web.aspnetcore.4.12.0.nupkg.sha512",
     "C:\\Users\\chuchunov.n-hom\\.nuget\\packages\\stub.system.data.sqlite.core.netstandard\\1.0.114.3\\stub.system.data.sqlite.core.netstandard.1.0.114.3.nupkg.sha512",
-    "C:\\Users\\chuchunov.n-hom\\.nuget\\packages\\system.data.sqlite.core\\1.0.114.3\\system.data.sqlite.core.1.0.114.3.nupkg.sha512"
+    "C:\\Users\\chuchunov.n-hom\\.nuget\\packages\\system.data.sqlite.core\\1.0.114.3\\system.data.sqlite.core.1.0.114.3.nupkg.sha512",
+    "C:\\Users\\chuchunov.n-hom\\.nuget\\packages\\system.reflection.emit\\4.7.0\\system.reflection.emit.4.7.0.nupkg.sha512",
+    "C:\\Users\\chuchunov.n-hom\\.nuget\\packages\\system.reflection.emit.lightweight\\4.7.0\\system.reflection.emit.lightweight.4.7.0.nupkg.sha512"
   ],
   "logs": [
     {
