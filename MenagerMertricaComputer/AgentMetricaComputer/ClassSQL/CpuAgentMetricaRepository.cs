@@ -19,9 +19,9 @@ namespace AgentMetricaComputer
             using (var connection = new SQLiteConnection(ConnectionString))
             {
 
-
+                
                
-                connection.Execute("CREATE TABLE cpumetrica( id INTEGER PRIMARY KEI, value INT, time INTEGER)", new { value = item.Value, time = item.Time });
+                connection.Execute("CREATE TABLE cpumetrica( id INTEGER PRIMARY KEI, value INT, time INT)", new { value = item.Value, time = item.Time  });
 
             }
 

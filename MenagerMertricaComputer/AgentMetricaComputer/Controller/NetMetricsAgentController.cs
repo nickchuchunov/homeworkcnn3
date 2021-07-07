@@ -16,10 +16,12 @@ namespace AgentMetricaComputer
 
 
         private NetMetricsAgentMetricaRepository repository; //!
+        private readonly IMapper mapper;
 
-        NetMetricsAgentController(NetMetricsAgentMetricaRepository repository) //
+        NetMetricsAgentController(NetMetricsAgentMetricaRepository repository, IMapper mapper) //
         {
             this.repository = repository;
+            this.mapper = mapper;
         }
 
 
@@ -41,19 +43,18 @@ namespace AgentMetricaComputer
         [HttpGet("all")]
         public IActionResult GetAll(int id)
         {
-            var config = new MapperConfiguration(ctf => ctf.CreateMap<NetMetricsAgentMetrica, MetricDto>());
-            var mapper = config.CreateMapper();
+          
 
 
             var metrics = repository.GetByTimePeriod(id);
-            var response = new MetricsResponse<MetricDto>
+            var response = new MetricsResponse<NetMetricDto>
             {
-                Metrics = new List<MetricDto>() //
+                Metrics = new List<NetMetricDto>() //
             };
             foreach (var metric in metrics)
             {
 
-                response.Metrics.Add(mapper.Map<MetricDto>(metric));
+                response.Metrics.Add(mapper.Map<NetMetricDto>(metric));
 
 
 

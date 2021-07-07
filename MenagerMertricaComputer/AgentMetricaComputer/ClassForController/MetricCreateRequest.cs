@@ -8,7 +8,7 @@ namespace AgentMetricaComputer
     public class MetricCreateRequest
     {
 
-        public long Time { get; set; }
+        public int Time { get; set; }
         public int Value { get; set; }
 
 

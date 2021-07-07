@@ -14,11 +14,15 @@ namespace AgentMetricaComputer
     public class RamAgentController : ControllerBase
     {
 
-        private RamAgentMetricaRepository repository; //!
+        private RamAgentMetricaRepository repository;
+        private readonly IMapper mapper;
 
-        RamAgentController(RamAgentMetricaRepository repository) //
+
+        RamAgentController(RamAgentMetricaRepository repository, IMapper mapper) 
         {
             this.repository = repository;
+            this.mapper = mapper;
+
         }
 
 
@@ -35,19 +39,17 @@ namespace AgentMetricaComputer
         [HttpGet("all")]
         public IActionResult GetAll(int id)
         {
-            var config = new MapperConfiguration(ctf => ctf.CreateMap<RamAgentMetrica, MetricDto>());
-            var mapper = config.CreateMapper();
-
+            
 
             var metrics = repository.GetByTimePeriod(id);
-            var response = new MetricsResponse<MetricDto>
+            var response = new MetricsResponse<RamMetricDto>
             {
-                Metrics = new List<MetricDto>() //
+                Metrics = new List<RamMetricDto>() //
             };
             foreach (var metric in metrics)
             {
 
-                response.Metrics.Add(mapper.Map<MetricDto>(metric));
+                response.Metrics.Add(mapper.Map<RamMetricDto>(metric));
 
 
 

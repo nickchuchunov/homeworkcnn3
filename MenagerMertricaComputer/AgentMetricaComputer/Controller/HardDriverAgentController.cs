@@ -16,11 +16,13 @@ namespace AgentMetricaComputer
     {
 
 
-        private HardDriveAgentMetricaRepository repository; //!
+        private HardDriveAgentMetricaRepository repository;
+        private readonly IMapper mapper;
 
-        HardDriverAgentController(HardDriveAgentMetricaRepository repository) //
+        HardDriverAgentController(HardDriveAgentMetricaRepository repository, IMapper mapper) //
         {
             this.repository = repository;
+            this.mapper = mapper;
         }
 
 
@@ -39,19 +41,17 @@ namespace AgentMetricaComputer
         [HttpGet("all")]
         public IActionResult GetAll(int id)
         {
-            var config = new MapperConfiguration(ctf => ctf.CreateMap<HardDriverAgentMetrica, MetricDto>());
-            var mapper = config.CreateMapper();
-
+            
 
             var metrics = repository.GetByTimePeriod(id);
-            var response = new MetricsResponse<MetricDto>
+            var response = new MetricsResponse<HardMetricDto>
             {
-                Metrics = new List<MetricDto>() //
+                Metrics = new List<HardMetricDto>() //
             };
             foreach (var metric in metrics)
             {
 
-                response.Metrics.Add(mapper.Map<MetricDto>(metric));
+                response.Metrics.Add(mapper.Map<HardMetricDto>(metric));
 
             }
 

@@ -4,18 +4,30 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Data.SQLite;
+using AutoMapper;
+using FluentMigrator.Runner;
+using System.Threading.Tasks;
+using Quartz;
+using Quartz.Impl;
+using Quartz.Spi;
+
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AgentMetricaComputer
 {
     public class Startup
     {
+       public const string connectionString = "Data Source = metrics.db; Version = 3; Pooling = true; Max Pool Size = 100;";
+
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
-       
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -39,78 +51,24 @@ namespace AgentMetricaComputer
 
 
 
-        private void PrepareSchema(SQLiteConnection connection)
-        {
-            using (var command = new SQLiteCommand(connection))
-            {
-                // задаем новый текст команды для выполнения
-                // удаляем таблицу с метриками если она существует в базе данных
-                command.CommandText = "DROP TABLE IF EXISTS netmetrics";
-                // отправляем запрос в базу данных
-                command.ExecuteNonQuery();
-                command.CommandText = @"CREATE TABLE netmetrics(id INTEGER PRIMARY KEY, value INT, time INT)";
-                command.ExecuteNonQuery();
-
-
-                command.CommandText = "DROP TABLE IF EXISTS networkmetrica";// 
-                // отправляем запрос в базу данных
-                command.ExecuteNonQuery();
-                command.CommandText = @"CREATE TABLE networkmetrica(id INTEGER PRIMARY KEY, value INT, time INT)";
-                command.ExecuteNonQuery();
+       
 
 
 
-                command.CommandText = "DROP TABLE IF EXISTS rammetrica";//  
-                // отправляем запрос в базу данных
-                command.ExecuteNonQuery();
-                command.CommandText = @"CREATE TABLE rammetrica(id INTEGER PRIMARY KEY, value INT, time INT)";
-                command.ExecuteNonQuery();
-
-
-
-
-                command.CommandText = "DROP TABLE IF EXISTS cpumetrica";
-                // отправляем запрос в базу данных
-                command.ExecuteNonQuery();
-                command.CommandText = @"CREATE TABLE cpumetrica(id INTEGER PRIMARY KEY, value INT, time INT)";
-                command.ExecuteNonQuery();
-
-
-
-
-                command.CommandText = "DROP TABLE IF EXISTS harddrivemetrica";//  
-                // отправляем запрос в базу данных
-                command.ExecuteNonQuery();
-                command.CommandText = @"CREATE TABLE harddrivemetrica(id INTEGER PRIMARY KEY, value INT, time INT)";
-                command.ExecuteNonQuery();
-
-
-
-
-
-
-            }
-
-
-
-        }
-
-
-
-            void ConfigureSqlLiteConnection(IServiceCollection services)
-        {
-            const string connectionString = "Data Source = metrics.db; Version = 3; Pooling = true; Max Pool Size = 100; ";
-var connection = new SQLiteConnection(connectionString);
-            connection.Open();
-            PrepareSchema(connection);
-        }
+       //     void ConfigureSqlLiteConnection(IServiceCollection services)
+       // {
+            
+        //    var connection = new SQLiteConnection(connectionString);
+        //    connection.Open();
+       //     PrepareSchema(connection);
+       // }
 
 
 
          void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            ConfigureSqlLiteConnection(services);
+          //  ConfigureSqlLiteConnection(services);
             services.AddScoped<INetMetricsAgentMetricaRepository, NetMetricsAgentMetricaRepository>();    
                 services.AddScoped<INetworkAgentMetricaRepository, NetworkAgentMetricaRepository>();
                 services.AddScoped<IRamAgentMetricaRepository, RamAgentMetricaRepository>();
@@ -118,7 +76,59 @@ var connection = new SQLiteConnection(connectionString);
                 services.AddScoped<IHardDriveAgentMetricaRepository, HardDriveAgentMetricaRepository>();
 
 
-         }
+            var mapperConfiguration = new MapperConfiguration(mp => mp.AddProfile(new MapperProfile()));
+            var mapper = mapperConfiguration.CreateMapper();
+            services.AddSingleton(mapper);
+
+
+            services.AddFluentMigratorCore().ConfigureRunner(rb => rb.AddSQLite().WithGlobalConnectionString(connectionString).ScanIn(typeof(Startup).Assembly).For.Migrations()).AddLogging(lb => lb.AddFluentMigratorConsole());
+
+
+
+
+
+            services.AddSingleton<IJobFactory, SingletonJobFactory>();
+            services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
+
+            services.AddSingleton<CpuMetricJob>();
+
+            services.AddSingleton(new JobSchedule(jobType: typeof(CpuMetricJob), cronExcpression: "0 / 5 * *** ?")) ;
+
+
+
+            
+
+            services.AddSingleton<RamMetricJob>(); // RamMetricJob
+
+            services.AddSingleton(new JobSchedule(jobType: typeof(RamMetricJob), cronExcpression: "0 / 5 * *** ?")); 
+
+
+
+           
+
+            services.AddSingleton<NetworkMetricJob>(); // NetworkMetricJob
+
+            services.AddSingleton(new JobSchedule(jobType: typeof(NetworkMetricJob), cronExcpression: "0 / 5 * *** ?")); 
+
+
+           
+            services.AddSingleton<NetMetricJob>(); // NetMetricJob
+
+            services.AddSingleton(new JobSchedule(jobType: typeof(NetMetricJob), cronExcpression: "0 / 5 * *** ?")); 
+
+
+
+            
+
+            services.AddSingleton<HardDriveMetricJob>(); // HardDriveMetricJob
+
+            services.AddSingleton(new JobSchedule(jobType: typeof(HardDriveMetricJob                                                                                                                                  ), cronExcpression: "0 / 5 * *** ?"));
+
+            services.AddHostedService<QuartzHostedService>();
+           
+
+
+        }
 
 
 
