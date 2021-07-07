@@ -19,7 +19,7 @@ namespace AgentMetricaComputer
             {
 
                 
-                connection.Execute("CREATE TABLE networkmetrica( id INTEGER PRIMARY KEI, value INT, time INTEGER)", new { value = item.Value, time = item.Time });
+                connection.Execute("CREATE TABLE networkmetrica( id INTEGER PRIMARY KEI, value INT, time INT)", new { value = item.Value, time = item.Time  });
 
             }
            

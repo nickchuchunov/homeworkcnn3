@@ -13,6 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestMenagerMetricsComputer"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2843D13A-87A2-41CA-B3DE-91A40BD25B09}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		nlog.config = nlog.config
 	EndProjectSection
 EndProject

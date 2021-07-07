@@ -18,10 +18,12 @@ namespace AgentMetricaComputer
     {
 
         private CpuAgentMetricaRepository repository;
+        private readonly IMapper mapper;
 
-        CpuAgentController(CpuAgentMetricaRepository repository)
+        CpuAgentController(CpuAgentMetricaRepository repository, IMapper mapper)
         {
             this.repository = repository;
+            this.mapper = mapper;
         }
 
 
@@ -41,19 +43,17 @@ namespace AgentMetricaComputer
         [HttpGet("all")]
         public IActionResult GetAll(int id)
         {
-            var config = new MapperConfiguration(ctf => ctf.CreateMap<CpuAgentMetrica, MetricDto>());
-            var mapper = config.CreateMapper();
-
+           
 
             var metrics = repository.GetByTimePeriod(id);
-            var response = new MetricsResponse<MetricDto>
+            var response = new MetricsResponse<CpuMetricDto>
             {
-                Metrics = new List<MetricDto>() //
+                Metrics = new List<CpuMetricDto>() //
             };
             foreach (var metric in metrics)
             {
 
-                response.Metrics.Add(mapper.Map<MetricDto>(metric));
+                response.Metrics.Add(mapper.Map<CpuMetricDto>(metric));
 
             }
 
