@@ -15,9 +15,9 @@ namespace AgentMetricaComputer
     {
 
 
-        private INetworkAgentMetricaRepository _repository;
+        private NetworkAgentMetricaRepository _repository;
         private PerformanceCounter _networkCounter;
-        public NetworkMetricJob(INetworkAgentMetricaRepository repository)
+        public NetworkMetricJob(NetworkAgentMetricaRepository repository)
         {
             _repository = repository;
 

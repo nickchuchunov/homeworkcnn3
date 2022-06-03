@@ -26,17 +26,31 @@ namespace AgentMetricaComputer
 
         }
 
-        public IList<RamAgentMetrica> GetByTimePeriod(int id) // чтение метрик из базы данных 
+        
+
+        public IEnumerable<RamAgentMetrica> GetByTimePeriod(int fromParameter, int toParameter) // чтение метрик из базы данных 
         {
+
 
             using (var connection = new SQLiteConnection(ConnectionString))
 
-            { 
-                return connection.QuerySingle<System.Collections.Generic.IList<RamAgentMetrica>>("SELECT Id, Time, Value FROM rammetrica WHERE id=@id", new { id = id });
+            {
+                int i = fromParameter;
+                IEnumerable<RamAgentMetrica> cpuagentmetrica = connection.QuerySingle<System.Collections.Generic.IEnumerable<RamAgentMetrica>>("SELECT Id, Time, Value FROM cpumetrica WHERE id=@id", new { Time = i });
+                while (i <= toParameter)
+                {
+                    yield return (RamAgentMetrica)cpuagentmetrica;
+                    i++;
+
+
+                    continue;
+                }
+                yield return (RamAgentMetrica)cpuagentmetrica;
             }
 
-          
-            
+
+
+
 
 
         }

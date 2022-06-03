@@ -9,7 +9,7 @@ using AutoMapper;
 
 namespace AgentMetricaComputer
 {
-    [Route("api/[controller]")]
+    [Route("api/RamAgentController")]
     [ApiController]
     public class RamAgentController : ControllerBase
     {
@@ -27,21 +27,12 @@ namespace AgentMetricaComputer
 
 
 
-        [HttpPost("create")]
-        public IActionResult Create([FromBody] MetricCreateRequest request)
-        {
-            repository.Create(new RamAgentMetrica { Time = request.Time, Value = request.Value });
-
-            return Ok();
-        }
-
-
-        [HttpGet("all")]
-        public IActionResult GetAll(int id)
+        [HttpGet("{fromParameter}/to/{toParameter})")]
+        public IActionResult GetAll([FromRoute] int fromParameter, [FromRoute]  int toParameter)
         {
             
 
-            var metrics = repository.GetByTimePeriod(id);
+            var metrics = repository.GetByTimePeriod(fromParameter,  toParameter);
             var response = new MetricsResponse<RamMetricDto>
             {
                 Metrics = new List<RamMetricDto>() //
@@ -50,8 +41,6 @@ namespace AgentMetricaComputer
             {
 
                 response.Metrics.Add(mapper.Map<RamMetricDto>(metric));
-
-
 
             }
             return Ok(response);

@@ -14,9 +14,9 @@ namespace AgentMetricaComputer
 {
     public class NetMetricJob : IJob
     {
-        private INetMetricsAgentMetricaRepository _repository;
+        private NetMetricsAgentMetricaRepository _repository;
         private PerformanceCounter _netCounter;
-        public NetMetricJob(INetMetricsAgentMetricaRepository repository)
+        public NetMetricJob(NetMetricsAgentMetricaRepository repository)
         {
             _repository = repository;
 

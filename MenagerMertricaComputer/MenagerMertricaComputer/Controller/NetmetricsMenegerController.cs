@@ -22,7 +22,7 @@ namespace MenagerMertricaComputer.Controller
 
             while (agentId != agentIdlog) { DateTime r = DateTime.Now; agentIdlog = agentId; LoggerCpuMenegerController.LogDebug(2, "Метод EnableAgentById, Входной параметр agentId  " + agentId + " " + r); }
 
-
+            while (agentId != agentIdlog) { DateTime r = DateTime.Now; agentIdlog = agentId; LoggerCpuMenegerController.LogDebug(2, "Метод EnableAgentById, Входной параметр agentId  " + agentId + " " + r); }
         }
 
 

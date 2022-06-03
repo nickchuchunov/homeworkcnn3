@@ -14,6 +14,14 @@ namespace MenagerMertricaComputer.Controller
     public class RamMenegerController : ControllerBase
     {
 
+
+
+
+
+
+
+
+
         public ILogger MenegerController; // объект для логирования
 
         void LoggerMenager(ILogger LoggerCpuMenegerController, object agentId) // функция логирования входных аргументов

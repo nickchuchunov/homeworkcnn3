@@ -13,9 +13,9 @@ namespace AgentMetricaComputer
 {
     public class RamMetricJob: IJob
     {
-        private IRamAgentMetricaRepository _repository;
+        private RamAgentMetricaRepository _repository;
         private PerformanceCounter _ramCounter;
-        public RamMetricJob (IRamAgentMetricaRepository repository)
+        public RamMetricJob (RamAgentMetricaRepository repository)
         {
             _repository = repository;
 

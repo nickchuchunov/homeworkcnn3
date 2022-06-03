@@ -9,7 +9,7 @@ using AutoMapper;
 
 namespace AgentMetricaComputer
 {
-    [Route("api/[controller]")]
+    [Route("api/NetworkAgentController")]
     [ApiController]
     public class NetworkAgentController : ControllerBase
     {
@@ -24,22 +24,16 @@ namespace AgentMetricaComputer
             this.mapper = mapper;
         }
 
-        [HttpPost("create")]
-        public IActionResult Create([FromBody] MetricCreateRequest request)
-        {
-            repository.Create(new NetworkAgentMetrica { Time = request.Time, Value = request.Value });
-
-            return Ok();
-        }
+       
 
 
-        [HttpGet("all")]
-        public IActionResult GetAll(int id)
+        [HttpGet("{fromParameter}/to/{toParameter}")]
+        public IActionResult GetAll([FromRoute] int fromParameter, [FromRoute] int toParameter)
         {
 
             
 
-            var metrics = repository.GetByTimePeriod(id);
+            var metrics = repository.GetByTimePeriod( fromParameter,  toParameter);
             var response = new MetricsResponse<NetworkMetricDto> 
             {
                 Metrics = new List<NetworkMetricDto>() //

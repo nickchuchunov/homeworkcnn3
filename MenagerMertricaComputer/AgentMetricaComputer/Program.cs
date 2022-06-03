@@ -50,16 +50,6 @@ namespace AgentMetricaComputer
 
         // добавляем библиотеку nlog *
 
-    
-
-
-
-
-
-
-
-
-
 
 
 

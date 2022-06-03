@@ -55,25 +55,18 @@ namespace AgentMetricaComputer
 
 
 
-       //     void ConfigureSqlLiteConnection(IServiceCollection services)
-       // {
-            
-        //    var connection = new SQLiteConnection(connectionString);
-        //    connection.Open();
-       //     PrepareSchema(connection);
-       // }
-
+   
 
 
          void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-          //  ConfigureSqlLiteConnection(services);
-            services.AddScoped<INetMetricsAgentMetricaRepository, NetMetricsAgentMetricaRepository>();    
-                services.AddScoped<INetworkAgentMetricaRepository, NetworkAgentMetricaRepository>();
-                services.AddScoped<IRamAgentMetricaRepository, RamAgentMetricaRepository>();
-                services.AddScoped<ICpuAgentMetricaRepository, CpuAgentMetricaRepository>();
-                services.AddScoped<IHardDriveAgentMetricaRepository, HardDriveAgentMetricaRepository>();
+          
+                services.AddSingleton<INetMetricsAgentMetricaRepository, NetMetricsAgentMetricaRepository>();    
+                services.AddSingleton<INetworkAgentMetricaRepository, NetworkAgentMetricaRepository>();
+                services.AddSingleton<IRamAgentMetricaRepository, RamAgentMetricaRepository>();
+                services.AddSingleton<ICpuAgentMetricaRepository, CpuAgentMetricaRepository>();
+                services.AddSingleton<IHardDriveAgentMetricaRepository, HardDriveAgentMetricaRepository>();
 
 
             var mapperConfiguration = new MapperConfiguration(mp => mp.AddProfile(new MapperProfile()));
@@ -122,7 +115,7 @@ namespace AgentMetricaComputer
 
             services.AddSingleton<HardDriveMetricJob>(); // HardDriveMetricJob
 
-            services.AddSingleton(new JobSchedule(jobType: typeof(HardDriveMetricJob                                                                                                                                  ), cronExcpression: "0 / 5 * *** ?"));
+            services.AddSingleton(new JobSchedule(jobType: typeof(HardDriveMetricJob), cronExcpression: "0 / 5 * *** ?"));
 
             services.AddHostedService<QuartzHostedService>();
            

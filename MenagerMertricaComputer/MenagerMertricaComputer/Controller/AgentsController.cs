@@ -15,8 +15,9 @@ namespace MenagerMertricaComputer.Controller
 
         public ILogger LoggerCpuMenegerController;
 
-
+        
         void LoggerMenager(ILogger LoggerCpuMenegerController, object agentId) // функция логирования входных аргументов
+
         {
             object agentIdlog = null;
             while (agentId != agentIdlog) { DateTime r = DateTime.Now; agentIdlog = agentId; LoggerCpuMenegerController.LogDebug(2, "Метод EnableAgentById, Входной параметр agentId  " + agentId + " " + r); }

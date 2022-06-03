@@ -26,16 +26,31 @@ namespace AgentMetricaComputer
         }
 
 
-        public IList<NetMetricsAgentMetrica> GetByTimePeriod(int id) // чтение метрик из базы данных 
+        
+
+         public IEnumerable<NetMetricsAgentMetrica> GetByTimePeriod(int fromParameter, int toParameter) // чтение метрик из базы данных 
         {
+
 
             using (var connection = new SQLiteConnection(ConnectionString))
 
             {
-                return connection.QuerySingle<System.Collections.Generic.IList<NetMetricsAgentMetrica>>("SELECT Id, Time, Value FROM netmetrics WHERE id=@id", new { id = id });
+                int i = fromParameter;
+                IEnumerable<NetMetricsAgentMetrica> cpuagentmetrica = connection.QuerySingle<System.Collections.Generic.IEnumerable<NetMetricsAgentMetrica>>("SELECT Id, Time, Value FROM cpumetrica WHERE id=@id", new { Time = i });
+                while (i <= toParameter)
+                {
+                    yield return (NetMetricsAgentMetrica)cpuagentmetrica;
+                    i++;
+
+
+                    continue;
+                }
+                yield return (NetMetricsAgentMetrica)cpuagentmetrica;
             }
 
-            //        returnList.Add(new RamAgentMetrica { Id = reader.GetInt32(0), Value = reader.GetInt32(1), Time = DateTimeOffset.FromUnixTimeSeconds(reader.GetInt32(1)) });// Преобразует время в формате Unix, выраженное как количество секунд, истекших с 1970 в DateTimeOfset
+
+
+
 
 
         }

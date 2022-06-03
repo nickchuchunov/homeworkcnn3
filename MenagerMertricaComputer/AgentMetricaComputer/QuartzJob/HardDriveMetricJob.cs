@@ -15,9 +15,9 @@ namespace AgentMetricaComputer
     public class HardDriveMetricJob : IJob
     {
 
-        private IHardDriveAgentMetricaRepository _repository;
+        private HardDriveAgentMetricaRepository _repository;
         private PerformanceCounter _harddriveCounter;
-        public HardDriveMetricJob(IHardDriveAgentMetricaRepository repository)
+        public HardDriveMetricJob(HardDriveAgentMetricaRepository repository)
         {
             _repository = repository;
 

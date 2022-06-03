@@ -1,0 +1,5 @@
+H:\homeworkcnn3\MenagerMertricaComputer\MenagerMertricaComputer\obj\Debug\netcoreapp3.1\MenagerMertricaComputer.csproj.AssemblyReference.cache
+H:\homeworkcnn3\MenagerMertricaComputer\MenagerMertricaComputer\obj\Debug\netcoreapp3.1\MenagerMertricaComputer.AssemblyInfoInputs.cache
+H:\homeworkcnn3\MenagerMertricaComputer\MenagerMertricaComputer\obj\Debug\netcoreapp3.1\MenagerMertricaComputer.AssemblyInfo.cs
+H:\homeworkcnn3\MenagerMertricaComputer\MenagerMertricaComputer\obj\Debug\netcoreapp3.1\MenagerMertricaComputer.csproj.CoreCompileInputs.cache
+H:\homeworkcnn3\MenagerMertricaComputer\MenagerMertricaComputer\obj\Debug\netcoreapp3.1\MenagerMertricaComputer.MvcApplicationPartsAssemblyInfo.cache

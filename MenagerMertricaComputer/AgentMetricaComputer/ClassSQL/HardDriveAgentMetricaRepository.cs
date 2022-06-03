@@ -19,7 +19,7 @@ namespace AgentMetricaComputer
             using (var connection = new SQLiteConnection(ConnectionString))
             {
 
-               
+
                 connection.Execute("CREATE TABLE harddrivemetrica( id INTEGER PRIMARY KEI, value INT, time INT)", new { value = item.Value, time = item.Time });
 
             }
@@ -29,20 +29,32 @@ namespace AgentMetricaComputer
 
 
 
-        public IList<HardDriverAgentMetrica> GetByTimePeriod(int id) // чтение метрик из базы данных 
+        public IEnumerable<HardDriverAgentMetrica> GetByTimePeriod(int fromParameter, int toParameter) // чтение метрик из базы данных 
         {
 
 
             using (var connection = new SQLiteConnection(ConnectionString))
 
             {
-                return connection.QuerySingle<System.Collections.Generic.IList<HardDriverAgentMetrica>>("SELECT Id, Time, Value FROM harddrivemetrica WHERE id=@id", new { id = id });
+                int i = fromParameter;
+                IEnumerable<HardDriverAgentMetrica> cpuagentmetrica = connection.QuerySingle<System.Collections.Generic.IEnumerable<HardDriverAgentMetrica>>("SELECT Id, Time, Value FROM cpumetrica WHERE id=@id", new { Time = i });
+                while (i <= toParameter)
+                {
+                    yield return (HardDriverAgentMetrica)cpuagentmetrica;
+                    i++;
+
+
+                    continue;
+                }
+                yield return (HardDriverAgentMetrica)cpuagentmetrica;
             }
 
-            //        returnList.Add(new RamAgentMetrica { Id = reader.GetInt32(0), Value = reader.GetInt32(1), Time = DateTimeOffset.FromUnixTimeSeconds(reader.GetInt32(1)) });// Преобразует время в формате Unix, выраженное как количество секунд, истекших с 1970 в DateTimeOfset
+
+
+
 
 
         }
-    }
 
+    }
 }

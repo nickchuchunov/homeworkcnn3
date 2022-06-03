@@ -11,6 +11,7 @@ namespace AgentMetricaComputer
     public class CpuAgentMetricaRepository : ICpuAgentMetricaRepository
     {
         private const string ConnectionString = "Data Source=metrics.db; Version=3;  Pooling=true; Max Pool Size=100;"; // Соединение с базой данных через конструктор 
+       
 
         public void Create(CpuAgentMetrica item) // Создание таблицы  в базе данных и запись метрик  в таблицу
         {
@@ -28,14 +29,24 @@ namespace AgentMetricaComputer
 
         }
 
-        public IList<CpuAgentMetrica> GetByTimePeriod(int id) // чтение метрик из базы данных 
+        public IEnumerable<CpuAgentMetrica> GetByTimePeriod(int fromParameter, int toParameter) // чтение метрик из базы данных 
         {
 
 
             using (var connection = new SQLiteConnection(ConnectionString))
 
             {
-                return connection.QuerySingle<System.Collections.Generic.IList<CpuAgentMetrica>>("SELECT Id, Time, Value FROM cpumetrica WHERE id=@id", new { id = id });
+                int i = fromParameter;
+                IEnumerable<CpuAgentMetrica> cpuagentmetrica = connection.QuerySingle<System.Collections.Generic.IEnumerable<CpuAgentMetrica>>("SELECT Id, Time, Value FROM cpumetrica WHERE id=@id", new { Time = i });
+                while (i<= toParameter)
+                {
+                    yield return (CpuAgentMetrica)cpuagentmetrica;
+                    i++;
+
+               
+                continue;
+                }
+                yield return (CpuAgentMetrica)cpuagentmetrica;
             }
 
 

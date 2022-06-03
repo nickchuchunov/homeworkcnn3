@@ -10,6 +10,7 @@
     <PackageReference Include="FluentMigrator" Version="3.2.17" />
     <PackageReference Include="FluentMigrator.Runner" Version="3.2.17" />
     <PackageReference Include="FluentMigrator.Runner.SQLite" Version="3.2.17" />
+    <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="5.0.8" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="4.12.0" />
     <PackageReference Include="Quartz" Version="3.3.2" />
     <PackageReference Include="System.Data.SQLite.Core" Version="1.0.114.3" />

@@ -14,11 +14,11 @@ namespace AgentMetricaComputer
     public class CpuMetricJob : IJob
     {
 
-        private ICpuAgentMetricaRepository _repository;
+        private CpuAgentMetricaRepository _repository;
 
         private PerformanceCounter _cpuCounter;
 
-        public CpuMetricJob(ICpuAgentMetricaRepository repository)
+        public CpuMetricJob(CpuAgentMetricaRepository repository)
         {
             _repository = repository;
 
